@@ -61,12 +61,23 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- TODO (MVVM - Display): Remove x:Name="viewWindow" and replace Text="" with Text="{Binding DisplayText}".
+             The TextBlock will then update automatically whenever DisplayText changes in the ViewModel.
+             You can also remove the x:Name since code-behind will no longer reference it directly. -->
         <Border Grid.Row="0" Grid.ColumnSpan="4" BorderBrush="#FF808080" BorderThickness="1.5" CornerRadius="3">
             <Viewbox Stretch="Uniform" HorizontalAlignment="Right" Margin="10,8">
                 <TextBlock x:Name="viewWindow" Text="" FontSize="34"/>
+                <!-- TODO (MVVM): Change the line above to: <TextBlock Text="{Binding DisplayText}" FontSize="34"/> -->
             </Viewbox>
         </Border>
 
+        <!-- TODO (MVVM - Buttons): Replace every Click="..." with Command="{Binding ...Command}".
+             For example:
+               Click="percentage_Click"   →   Command="{Binding PercentageCommand}"
+               Click="clear_Entry_Click"  →   Command="{Binding ClearEntryCommand}"
+               Click="clear_Click"        →   Command="{Binding ClearCommand}"
+               Click="delete_Click"       →   Command="{Binding DeleteCommand}"
+             The bindings work because DataContext is set to CalculatorViewModel in the code-behind. -->
         <Button Grid.Row="2" Grid.Column="0" Content="%" Click="percentage_Click"/>
         <Button Grid.Row="2" Grid.Column="1" Content="CE" Click="clear_Entry_Click"/>
         <Button Grid.Row="2" Grid.Column="2" Content="C" Click="clear_Click"/>
@@ -77,6 +88,9 @@
         <Button Grid.Row="3" Grid.Column="2" Content="√x" Click="square_Root_Click"/>
         <Button Grid.Row="3" Grid.Column="3" Content="÷" Click="divide_Click"/>
 
+        <!-- TODO (MVVM - Digit buttons): These could all share a single AppendDigitCommand using CommandParameter.
+             Example: Command="{Binding AppendDigitCommand}" CommandParameter="7"
+             Then in the ViewModel, AppendDigitCommand receives the digit string as its parameter. -->
         <Button Grid.Row="4" Grid.Column="0" Content="7" Click="seven_Click"/>
         <Button Grid.Row="4" Grid.Column="1" Content="8" Click="eight_Click"/>
         <Button Grid.Row="4" Grid.Column="2" Content="9" Click="nine_Click"/>
