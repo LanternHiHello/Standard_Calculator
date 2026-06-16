@@ -17,6 +17,7 @@ Requirements:
 How to build and run:
 
   dotnet build
+  
   dotnet run --project Stuller.Calc.csproj
 
 
