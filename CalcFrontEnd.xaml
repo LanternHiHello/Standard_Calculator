@@ -5,35 +5,96 @@
         xmlns:local="clr-namespace:Calculator"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Foreground="{DynamicResource Theme_TextBrush}" Height="511">
+        Foreground="{DynamicResource Theme_TextBrush}"
+        Width="560" Height="500"
+        MinWidth="300" MinHeight="450">
 
-    <Grid Background="White" Width="556">
-        <Border BorderBrush="Black" BorderThickness="1.5" CornerRadius="3"  Margin="32,32,32,384">
-            <TextBlock x:Name="viewWindow" Text="" FontSize="34" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="469" Height="80" Padding="10,20,0,0" />
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <Viewbox Stretch="Uniform" Margin="6">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Viewbox>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#D0D0D0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" BlurRadius="6" ShadowDepth="2" Opacity="0.3" Direction="270"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="White" Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="4" BorderBrush="#FF808080" BorderThickness="1.5" CornerRadius="3">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Right" Margin="10,8">
+                <TextBlock x:Name="viewWindow" Text="" FontSize="34"/>
+            </Viewbox>
         </Border>
-        <Button Content="%" Click="percentage_Click" Margin="32,168,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="88"/>
-        <Button Content="CE" Click="clear_Entry_Click" Margin="160,168,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="C" Click="clear_Click" Margin="296,168,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="⌫" Click="delete_Click" Margin="432,168,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="⅟x" Click="reciprocal_Click" Margin="32,216,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="x²" Click="exponent_Click" Margin="32,264,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="√" Click="square_Root_Click" Margin="32,312,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="÷" Click="divide_Click" Margin="32,360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="7" Click="seven_Click" Margin="32,408,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="8" Click="eight_Click" Margin="160,216,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="9" Click="nine_Click" Margin="160,264,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="×" Click="multiply_Click" Margin="160,312,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="4" Click="four_Click" Margin="160,360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="5" Click="five_Click" Margin="160,408,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="6" Click="six_Click" Margin="296,216,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="-" Click="minus_Click" Margin="432,216,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="1" Click="one_Click" Margin="296,264,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="2" Click="two_Click" Margin="296,312,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="3" Click="three_Click" Margin="296,360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="+" Click="plus_Click" Margin="296,408,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="+/-" Click="negative_Positive_Click" Margin="432,264,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="0" Click="zero_Click" Margin="432,312,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="." Click="dot_Click" Margin="432,360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
-        <Button Content="=" Click="equals_Click" Margin="432,408,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="32" />
+
+        <Button Grid.Row="2" Grid.Column="0" Content="%" Click="percentage_Click"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="CE" Click="clear_Entry_Click"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="C" Click="clear_Click"/>
+        <Button Grid.Row="2" Grid.Column="3" Content="⌫" Click="delete_Click"/>
+
+        <Button Grid.Row="3" Grid.Column="0" Content="⅟x" Click="reciprocal_Click"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="x²" Click="exponent_Click"/>
+        <Button Grid.Row="3" Grid.Column="2" Content="√x" Click="square_Root_Click"/>
+        <Button Grid.Row="3" Grid.Column="3" Content="÷" Click="divide_Click"/>
+
+        <Button Grid.Row="4" Grid.Column="0" Content="7" Click="seven_Click"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="8" Click="eight_Click"/>
+        <Button Grid.Row="4" Grid.Column="2" Content="9" Click="nine_Click"/>
+        <Button Grid.Row="4" Grid.Column="3" Content="x" Click="multiply_Click"/>
+
+        <Button Grid.Row="5" Grid.Column="0" Content="4" Click="four_Click"/>
+        <Button Grid.Row="5" Grid.Column="1" Content="5" Click="five_Click"/>
+        <Button Grid.Row="5" Grid.Column="2" Content="6" Click="six_Click"/>
+        <Button Grid.Row="5" Grid.Column="3" Content="-" Click="minus_Click"/>
+
+        <Button Grid.Row="6" Grid.Column="0" Content="1" Click="one_Click"/>
+        <Button Grid.Row="6" Grid.Column="1" Content="2" Click="two_Click"/>
+        <Button Grid.Row="6" Grid.Column="2" Content="3" Click="three_Click"/>
+        <Button Grid.Row="6" Grid.Column="3" Content="+" Click="plus_Click"/>
+
+        <Button Grid.Row="7" Grid.Column="0" Content="+/-" Click="negative_Positive_Click"/>
+        <Button Grid.Row="7" Grid.Column="1" Content="0" Click="zero_Click"/>
+        <Button Grid.Row="7" Grid.Column="2" Content="." Click="dot_Click"/>
+        <Button Grid.Row="7" Grid.Column="3" Content="=" Click="equals_Click"/>
     </Grid>
 </Window>

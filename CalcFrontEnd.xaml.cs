@@ -112,17 +112,21 @@ namespace Calculator
 
         private void exponent_Click(object sender, RoutedEventArgs e)
         {
-            operand1 = input;
-            operation = '^';
+            double.TryParse(input, out double num);
+            input = Math.Pow(num, 2).ToString();
+            viewWindow.Text = input;
+
         }
 
         private void percentage_Click(object sender, RoutedEventArgs e)
         {
-            operand1 = input;
-            operation = '%';
-            input = string.Empty;
+            double.TryParse(input, out double num);
+            input = (num / 100).ToString();
+            viewWindow.Text = input;
         }
 
+
+        //Clears all progress in calculator 
         private void clear_Click(object sender, RoutedEventArgs e)
         {
             viewWindow.Text = "";
@@ -131,6 +135,7 @@ namespace Calculator
             operand2 = string.Empty;
         }
 
+        // Clears only most recently typed number
         private void clear_Entry_Click(object sender, RoutedEventArgs e)
         {
             viewWindow.Text = "";
@@ -141,30 +146,30 @@ namespace Calculator
         {
             if (input.Length > 0)
             {
-                input = input.Substring(0, input.Length - 1);
+                input = input.Remove(input.Length - 1);
                 viewWindow.Text = input;
             }
         }
 
         private void negative_Positive_Click(object sender, RoutedEventArgs e)
         {
-            operand1 = input;
-            operation = '@';
-            input = string.Empty;
+            double.TryParse(input, out double num);
+            input = (num * -1).ToString();
+            viewWindow.Text = input;
         }
 
         private void reciprocal_Click(object sender, RoutedEventArgs e)
         {
-            operand1 = input;
-            operation = '`';
-            input = string.Empty;
+            double.TryParse(input, out double num);
+            input = (1 / num).ToString();
+            viewWindow.Text = input;
         }
 
         private void square_Root_Click(object sender, RoutedEventArgs e)
         {
-            operand1 = input;
-            operation = '$';
-            input = string.Empty;
+            double.TryParse(input, out double num);
+            input = (Math.Sqrt(num)).ToString();
+            viewWindow.Text = input;
         }
 
         private void equals_Click(object sender, RoutedEventArgs e)
@@ -175,10 +180,13 @@ namespace Calculator
 
             if (operation == '+')
                 result = num1 + num2;
+            
             else if (operation == '-')
                 result = num1 - num2;
+            
             else if (operation == '*')
                 result = num1 * num2;
+            
             else if (operation == '/')
             {
                 if (num2 != 0)
@@ -189,16 +197,6 @@ namespace Calculator
                     return;
                 }
             }
-            else if (operation == '^')
-                result = Math.Pow(num1, 2);
-            else if (operation == '%')
-                result = num1 / 100;
-            else if (operation == '`')
-                result = 1 / num1;
-            else if (operation == '$')
-                result = Math.Sqrt(num1);
-            else if (operation == '@')
-                result = num1 * -1;
 
             viewWindow.Text = result.ToString();
             input = result.ToString();
