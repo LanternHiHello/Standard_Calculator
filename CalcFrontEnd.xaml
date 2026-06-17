@@ -61,54 +61,51 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- TODO (MVVM - Display): Remove x:Name="viewWindow" and replace Text="" with Text="{Binding DisplayText}".
-             The TextBlock will then update automatically whenever DisplayText changes in the ViewModel.
-             You can also remove the x:Name since code-behind will no longer reference it directly. -->
+
         <Border Grid.Row="0" Grid.ColumnSpan="4" BorderBrush="#FF808080" BorderThickness="1.5" CornerRadius="3">
-            <Viewbox Stretch="Uniform" HorizontalAlignment="Right" Margin="10,8">
-                <TextBlock x:Name="viewWindow" Text="" FontSize="34"/>
-                <!-- TODO (MVVM): Change the line above to: <TextBlock Text="{Binding DisplayText}" FontSize="34"/> -->
-            </Viewbox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="{Binding ExpressionText}"
+                           Foreground="#AAAAAA" FontSize="16"
+                           HorizontalAlignment="Right" Margin="10,6,10,0"/>
+                <Viewbox Grid.Row="1" Stretch="Uniform" HorizontalAlignment="Right" Margin="10,4,10,8">
+                    <TextBlock Text="{Binding DisplayText}" FontSize="34"/>
+                </Viewbox>
+            </Grid>
         </Border>
+       
+        <Button Grid.Row="2" Grid.Column="0" Content="%" Command="{Binding PercentageCommand}"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="CE" Command="{Binding ClearEntryCommand}"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="C" Command="{Binding ClearCommand}"/>
+        <Button Grid.Row="2" Grid.Column="3" Content="⌫" Command="{Binding DeleteCommand}"/>
 
-        <!-- TODO (MVVM - Buttons): Replace every Click="..." with Command="{Binding ...Command}".
-             For example:
-               Click="percentage_Click"   →   Command="{Binding PercentageCommand}"
-               Click="clear_Entry_Click"  →   Command="{Binding ClearEntryCommand}"
-               Click="clear_Click"        →   Command="{Binding ClearCommand}"
-               Click="delete_Click"       →   Command="{Binding DeleteCommand}"
-             The bindings work because DataContext is set to CalculatorViewModel in the code-behind. -->
-        <Button Grid.Row="2" Grid.Column="0" Content="%" Click="percentage_Click"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="CE" Click="clear_Entry_Click"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="C" Click="clear_Click"/>
-        <Button Grid.Row="2" Grid.Column="3" Content="⌫" Click="delete_Click"/>
+        <Button Grid.Row="3" Grid.Column="0" Content="⅟x" Command="{Binding ReciprocalCommand}"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="x²" Command="{Binding ExponentCommand}"/>
+        <Button Grid.Row="3" Grid.Column="2" Content="√x" Command="{Binding SquareRootCommand}"/>
+        <Button Grid.Row="3" Grid.Column="3" Content="÷" Command="{Binding DivideCommand}"/>
 
-        <Button Grid.Row="3" Grid.Column="0" Content="⅟x" Click="reciprocal_Click"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="x²" Click="exponent_Click"/>
-        <Button Grid.Row="3" Grid.Column="2" Content="√x" Click="square_Root_Click"/>
-        <Button Grid.Row="3" Grid.Column="3" Content="÷" Click="divide_Click"/>
+        <Button Grid.Row="4" Grid.Column="0" Content="7" Command="{Binding AppendDigitCommand}" CommandParameter="7"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="8" Command="{Binding AppendDigitCommand}" CommandParameter="8"/>
+        <Button Grid.Row="4" Grid.Column="2" Content="9" Command="{Binding AppendDigitCommand}" CommandParameter="9"/>
+        <Button Grid.Row="4" Grid.Column="3" Content="x" Command="{Binding MultiplyCommand}"/>
 
-        <!-- TODO (MVVM - Digit buttons): These could all share a single AppendDigitCommand using CommandParameter.
-             Example: Command="{Binding AppendDigitCommand}" CommandParameter="7"
-             Then in the ViewModel, AppendDigitCommand receives the digit string as its parameter. -->
-        <Button Grid.Row="4" Grid.Column="0" Content="7" Click="seven_Click"/>
-        <Button Grid.Row="4" Grid.Column="1" Content="8" Click="eight_Click"/>
-        <Button Grid.Row="4" Grid.Column="2" Content="9" Click="nine_Click"/>
-        <Button Grid.Row="4" Grid.Column="3" Content="x" Click="multiply_Click"/>
+        <Button Grid.Row="5" Grid.Column="0" Content="4" Command="{Binding AppendDigitCommand}" CommandParameter="4"/>
+        <Button Grid.Row="5" Grid.Column="1" Content="5" Command="{Binding AppendDigitCommand}" CommandParameter="5"/>
+        <Button Grid.Row="5" Grid.Column="2" Content="6" Command="{Binding AppendDigitCommand}" CommandParameter="6"/>
+        <Button Grid.Row="5" Grid.Column="3" Content="-" Command="{Binding SubtractCommand}"/>
 
-        <Button Grid.Row="5" Grid.Column="0" Content="4" Click="four_Click"/>
-        <Button Grid.Row="5" Grid.Column="1" Content="5" Click="five_Click"/>
-        <Button Grid.Row="5" Grid.Column="2" Content="6" Click="six_Click"/>
-        <Button Grid.Row="5" Grid.Column="3" Content="-" Click="minus_Click"/>
+        <Button Grid.Row="6" Grid.Column="0" Content="1" Command="{Binding AppendDigitCommand}" CommandParameter="1"/>
+        <Button Grid.Row="6" Grid.Column="1" Content="2" Command="{Binding AppendDigitCommand}" CommandParameter="2"/>
+        <Button Grid.Row="6" Grid.Column="2" Content="3" Command="{Binding AppendDigitCommand}" CommandParameter="3"/>
+        <Button Grid.Row="6" Grid.Column="3" Content="+" Command="{Binding AdditionCommand}"/>
 
-        <Button Grid.Row="6" Grid.Column="0" Content="1" Click="one_Click"/>
-        <Button Grid.Row="6" Grid.Column="1" Content="2" Click="two_Click"/>
-        <Button Grid.Row="6" Grid.Column="2" Content="3" Click="three_Click"/>
-        <Button Grid.Row="6" Grid.Column="3" Content="+" Click="plus_Click"/>
-
-        <Button Grid.Row="7" Grid.Column="0" Content="+/-" Click="negative_Positive_Click"/>
-        <Button Grid.Row="7" Grid.Column="1" Content="0" Click="zero_Click"/>
-        <Button Grid.Row="7" Grid.Column="2" Content="." Click="dot_Click"/>
-        <Button Grid.Row="7" Grid.Column="3" Content="=" Click="equals_Click"/>
+        <Button Grid.Row="7" Grid.Column="0" Content="+/-" Command="{Binding NegativePositiveCommand}"/>
+        <Button Grid.Row="7" Grid.Column="1" Content="0" Command="{Binding AppendDigitCommand}" CommandParameter="0"/>
+        <Button Grid.Row="7" Grid.Column="2" Content="." Command="{Binding DecimalCommand}"/>
+        <Button Grid.Row="7" Grid.Column="3" Content="=" Command="{Binding ResultCommand}"/>
     </Grid>
 </Window>
