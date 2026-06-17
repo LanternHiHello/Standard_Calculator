@@ -1,52 +1,39 @@
-<Window x:Class="Calculator.Form1"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Window x:Class="Calculator.MainWindow"
+        xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Calculator"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Foreground="{DynamicResource Theme_TextBrush}"
-        Width="560" Height="500"
-        MinWidth="300" MinHeight="450">
+        Foreground="#000000"
+        Icon="avares://StullerCalc/Assets/calculator.ico"
+        Width="560" Height="620"
+        MinWidth="300" MinHeight="500"
+        Title="Stuller Official Calculator">
 
-    <Window.Resources>
-        <Style TargetType="Button">
+    
+    <Window.Styles>
+        <Style Selector="Button">
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
-                            <Viewbox Stretch="Uniform" Margin="6">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Viewbox>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#D0D0D0"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="6" ShadowDepth="2" Opacity="0.3" Direction="270"/>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="MinWidth" Value="0"/>
         </Style>
-    </Window.Resources>
+        <Style Selector="Button:pressed">
+            <Setter Property="Background" Value="#D0D0D0"/>
+        </Style>
+    </Window.Styles>
 
     <Grid Background="White" Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -77,7 +64,8 @@
                 </Viewbox>
             </Grid>
         </Border>
-       
+
+ 
         <Button Grid.Row="2" Grid.Column="0" Content="%" Command="{Binding PercentageCommand}"/>
         <Button Grid.Row="2" Grid.Column="1" Content="CE" Command="{Binding ClearEntryCommand}"/>
         <Button Grid.Row="2" Grid.Column="2" Content="C" Command="{Binding ClearCommand}"/>

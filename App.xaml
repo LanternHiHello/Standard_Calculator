@@ -1,7 +1,20 @@
-<Application x:Class="Calculator.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<!--
+    App.xaml sets up the application-wide configuration.
+    Right now it has one job: loading the FluentTheme.
+
+    FluentTheme is Avalonia's built-in theme, it's what makes buttons, text,
+    and borders look like a proper desktop app out of the box. Without it,
+    controls would have no default styling at all.
+
+    If you ever want to switch the look (ex. dark mode), this is where you'd do it:
+        <FluentTheme RequestedThemeVariant="Dark"/>
+    or for light:
+        <FluentTheme RequestedThemeVariant="Light"/>
+-->
+<Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="CalcFrontEnd.xaml">
-    <Application.Resources>
-    </Application.Resources>
+             x:Class="Calculator.App">
+    <Application.Styles>
+        <FluentTheme/>
+    </Application.Styles>
 </Application>

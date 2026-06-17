@@ -1,13 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <StartupObject>Calculator.Program</StartupObject>
     <RootNamespace>Calculator</RootNamespace>
     <AssemblyName>StullerCalc</AssemblyName>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.0"/>
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.0"/>
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Include="**\*.xaml"/>
+    <AvaloniaXaml Remove="AvaloniaExample.axaml"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- App/taskbar icon shown in Windows Explorer and the taskbar -->
+    <ApplicationIcon Include="Assets\calculator.ico"/>
+    <!-- Embed the icon so Avalonia can load it at runtime for the window title bar -->
+    <AvaloniaResource Include="Assets\**"/>
+  </ItemGroup>
 
 </Project>
